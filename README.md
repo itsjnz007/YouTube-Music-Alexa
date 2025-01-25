@@ -36,7 +36,7 @@ This repository contains the source code for an Alexa skill that allows users to
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-repo-name/alexa-youtube-music.git
+git clone https://github.com/itsjnz007/YouTube-Music-Alexa/
 cd alexa-youtube-music
 ```
 
@@ -62,7 +62,7 @@ Follow the AWS Lambda setup guide here: [AWS Lambda Setup](https://docs.aws.amaz
 ---
 
 ## Setting Up API URL and Playlists
-
+Visit the api url's **`<api_url>/setup/`** page encoders.
 ### Setting up API URL for Alexa Music
 
 1. Set up an API URL using NGROK (free) and host the Flask app.
