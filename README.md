@@ -99,6 +99,7 @@ Follow the AWS Lambda setup guide here: [AWS Lambda Setup](https://docs.aws.amaz
    ```bash
    pkg install python
    pip install flask
+   pip install Flask-Async
    ```
 3. Install NGROK:
    ```bash
