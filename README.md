@@ -92,25 +92,6 @@ Follow the AWS Lambda setup guide here: [AWS Lambda Setup](https://docs.aws.amaz
 
 ---
 
-## Optional: Android Setup with Termux
-
-1. Install Termux on your Android device.
-2. Install Python and pip:
-   ```bash
-   pkg install python
-   pip install flask
-   pip install Flask-Async
-   ```
-3. Install NGROK:
-   ```bash
-   pkg install wget
-   wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
-   unzip ngrok-stable-linux-arm.zip
-   ```
-4. Start the Flask server and NGROK as described above.
-
----
-
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
