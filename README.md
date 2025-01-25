@@ -62,7 +62,7 @@ Follow the AWS Lambda setup guide here: [AWS Lambda Setup](https://docs.aws.amaz
 ---
 
 ## Setting Up API URL and Playlists
-Visit the api url's **`<api_url>/setup/`** page encoders.
+Visit the api url's **`<api_url>/setup/`** page for encoders.
 ### Setting up API URL for Alexa Music
 
 1. Set up an API URL using NGROK (free) and host the Flask app.
