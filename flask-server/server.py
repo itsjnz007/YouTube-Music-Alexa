@@ -180,7 +180,7 @@ async def find_stream_list():
     return jsonify(response)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/setup/", methods=["GET", "POST"])
 def index():
     hex_value = ""
     if request.method == "POST":
@@ -190,6 +190,16 @@ def index():
         elif playlist_input: hex_value = Supporting.playlist_url_to_encoded_id(playlist_input)
         else: hex_value = 'Please fill the form to get encoded output.'
     return render_template("index.html", hex_value=hex_value)
+
+
+@app.route("/privacy_policy/", methods=["GET"])
+def privacy_policy():
+    return render_template("privacy_policy.html")
+
+
+@app.route("/terms_of_use/", methods=["GET"])
+def terms_of_use():
+    return render_template("terms_of_use.html")
 
 
 # Main entry point
