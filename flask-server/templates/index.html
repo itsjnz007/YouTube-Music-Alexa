@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding Playlists to Alexa Music</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        #hexOutput {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            background-color: #f4f4f4;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        h3 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Setting up api url / Adding Playlists to Alexa Music</h1>
+    <form method="POST">
+        <label>How to setup api url for Alexa music:</label>
+        <label>1. Setup api url (ngrok for free) and host the flask app.</label>
+        <label>2. Copy the api URL and encode it using the field below.</label>
+        <label>3. Copy the encoded URL and use the Alexa app (mobile) to enter the command:
+            <em>'Alexa, ask DJ to set api url &lt;replace_with_encoded_url&gt;'.</em>
+        </label>
+
+        <label for="apiurl_input">Enter URL:</label>
+        <input type="text" id="apiurl_input" name="apiurl_input"><br>
+
+        <button type="submit">Encode API url</button>
+        <label>How to add YouTube Music/YouTube playlists to Alexa music:</label>
+        <label>1. Create a public playlist on YouTube Music/YouTube.</label>
+        <label>2. Copy the playlist URL and encode it using the field below.</label>
+        <label>3. Copy the encoded URL and use the Alexa app (mobile) to enter the command:
+            <em>'Alexa, ask DJ to add playlist &lt;replace_with_encoded_url&gt;'.</em>
+        </label>
+
+        <label for="playlist_input">Enter URL:</label>
+        <input type="text" id="playlist_input" name="playlist_input"><br>
+
+        <button type="submit">Encode playlist url</button>
+    </form>
+
+    {% if hex_value %}
+        <h3>Encoded Output:</h3>
+        <textarea id="hexOutput" readonly>{{ hex_value }}</textarea><br>
+        <button id="copyButton" onclick="copyHex()">Copy to Clipboard</button>
+    {% endif %}
+
+    <script>
+        function copyHex() {
+            var hexOutput = document.getElementById("hexOutput");
+            hexOutput.select();
+            hexOutput.setSelectionRange(0, 99999); // For mobile devices
+
+            document.execCommand("copy");
+            alert("Hex copied to clipboard!");
+        }
+    </script>
+</body>
+</html>

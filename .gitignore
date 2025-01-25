@@ -1,0 +1,4 @@
+.ask
+.vscode
+*.ipynb
+__pycache__

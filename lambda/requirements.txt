@@ -1,0 +1,8 @@
+boto3
+ask-sdk-core
+ask-sdk-dynamodb-persistence-adapter
+ask_sdk
+ytmusicapi
+requests
+aiohttp == 3.8.0
+dacite
