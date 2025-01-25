@@ -49,8 +49,6 @@ Follow the NGROK setup instructions here: [NGROK Setup](https://ngrok.com/docs).
 
 1. Navigate to the Alexa Developer Console and create a new skill.
 2. Upload the provided interaction model.
-3. Set the endpoint by saying, "Alexa ask DJ to set api url." Use the NGROK URL from the previous step.
-4. Instructions to set up playlists and API URL are provided below.
 
 ### Step 4: Deploy the Lambda Function
 
@@ -59,6 +57,8 @@ Follow the AWS Lambda setup guide here: [AWS Lambda Setup](https://docs.aws.amaz
 ### Step 5: Test the Skill
 
 - Use the Alexa simulator or your Alexa-enabled device to test the skill.
+- Set the endpoint by saying, "Alexa ask DJ to set api url." Use the NGROK URL from the previous step.
+- Instructions to set up playlists and API URL are provided below.
 
 ---
 
