@@ -8,6 +8,7 @@ This repository contains the source code for an Alexa skill that allows users to
 
 - **Play YouTube Music:** Stream your favorite tracks directly from YouTube.
 - **Playlist Integration:** Sync YouTube playlists and favorites with Alexa.
+- **Player Options:** Shuffle, repeat, startover.
 - **Flask Server:** The skill leverages a Flask-based backend server for handling YouTube data.
 - **NGROK Setup:** Easily set up the server using NGROK.
 - **Android Termux Support:** Run the Flask server on Android devices using Termux.
@@ -88,7 +89,7 @@ Visit the api url's **`<api_url>/setup/`** page for encoders.
 - "Alexa, ask DJ to play [song name]."
 - "Alexa, ask DJ to set API URL."
 - "Alexa, ask DJ to play my playlist."
-- "Alexa, next song", "...pause ...play ..."
+- "Alexa, next song", "...pause ...play ...shuffle on/off ...repeat on/off ...start over ..."
 
 ---
 
