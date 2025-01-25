@@ -91,7 +91,7 @@ Visit the api url's **`<api_url>/setup/`** page for encoders.
 - "Alexa, ask DJ to play my [playlist name] / Alexa, ask DJ to play playlist [playlist name]"
 - "Alexa, ask DJ to play songs by [artist name]"
 - "Alexa, ask DJ to play album [album name]."
-- "Alexa, next song", "...pause ...play ...shuffle on/off ...repeat on/off ...start over ..."
+- "Alexa, next/previous song", "...pause ...play ...shuffle on/off ...repeat on/off ...start over ..."
 
 ---
 
