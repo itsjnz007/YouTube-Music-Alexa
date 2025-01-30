@@ -14,5 +14,5 @@ PLAYBACK_PLAY = "Playing {} by {}"
 PLAYBACK_PLAY_CARD = "Playing {}"
 PLAYBACK_NEXT_END = "You have reached the end of the playlist"
 PLAYBACK_PREVIOUS_END = "You have reached the start of the playlist"
-API_CONNECTION_ISSUE = 'Could not connect to api url. Please check if the connection to the url or set a new url.'
+API_CONNECTION_ISSUE = 'Could not connect to api url. Please check the connection to the url or set a new url.'
 API_URL_NOT_SET = 'Api url not set. To set api url, say, "Alexa, ask DJ to set api url"'
