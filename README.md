@@ -8,6 +8,7 @@ This repository contains the source code for an Alexa skill that allows users to
 
 - **Play YouTube Music:** Stream your favorite tracks directly from YouTube.
 - **Playlist Integration:** Sync YouTube playlists and favorites with Alexa.
+- **Player Options:** Shuffle, repeat, startover, songs by artists, albums.
 - **Flask Server:** The skill leverages a Flask-based backend server for handling YouTube data.
 - **NGROK Setup:** Easily set up the server using NGROK.
 - **Android Termux Support:** Run the Flask server on Android devices using Termux.
@@ -48,8 +49,6 @@ Follow the NGROK setup instructions here: [NGROK Setup](https://ngrok.com/docs).
 
 1. Navigate to the Alexa Developer Console and create a new skill.
 2. Upload the provided interaction model.
-3. Set the endpoint by saying, "Alexa ask DJ to set api url." Use the NGROK URL from the previous step.
-4. Instructions to set up playlists and API URL are provided below.
 
 ### Step 4: Deploy the Lambda Function
 
@@ -58,11 +57,13 @@ Follow the AWS Lambda setup guide here: [AWS Lambda Setup](https://docs.aws.amaz
 ### Step 5: Test the Skill
 
 - Use the Alexa simulator or your Alexa-enabled device to test the skill.
+- Set the endpoint by saying, "Alexa ask DJ to set api url." Use the NGROK URL from the previous step.
+- Instructions to set up playlists and API URL are provided below.
 
 ---
 
 ## Setting Up API URL and Playlists
-Visit the api url's **`<api_url>/setup/`** page encoders.
+Visit the api url's **`<api_url>/setup/`** page for encoders.
 ### Setting up API URL for Alexa Music
 
 1. Set up an API URL using NGROK (free) and host the Flask app.
@@ -87,8 +88,10 @@ Visit the api url's **`<api_url>/setup/`** page encoders.
 
 - "Alexa, ask DJ to play [song name]."
 - "Alexa, ask DJ to set API URL."
-- "Alexa, ask DJ to play my playlist."
-- "Alexa, next song", "...pause ...play ..."
+- "Alexa, ask DJ to play my [playlist name] / Alexa, ask DJ to play playlist [playlist name]"
+- "Alexa, ask DJ to play songs by [artist name]"
+- "Alexa, ask DJ to play album [album name]."
+- "Alexa, next/previous song", "...pause ...play ...shuffle on/off ...repeat on/off ...start over ..."
 
 ---
 
