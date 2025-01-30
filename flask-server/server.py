@@ -1,6 +1,5 @@
-import asyncio
-import time
-import yt_dlp, re
+import asyncio, time, re, subprocess
+# import yt_dlp
 from ytmusicapi import YTMusic
 from flask import Flask, request, render_template, jsonify
 
@@ -92,26 +91,14 @@ class Supporting:
         stream = await Supporting.get_stream(playlist[0]['video_id'])
         return {'song_info': {'metadata': playlist[0], 'stream': stream}, 'playlist': playlist}
 
-    async def get_stream(video_id: str):
-        ydl_opts = {
-            "default_search": "ytsearch",
-            "ignoreerrors": True,
-            "format": "m4a/bestaudio/best",
-            "noplaylist": True,
-            "nocheckcertificate": True,
-            "geo_bypass": True,
-            "quiet": True,
-            "skip_download": True,
-        }
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = await asyncio.to_thread(ydl.extract_info, video_id, download=False)
-            if not info:
-                return None
+    async def get_stream(video_id: str):    
+        command = ["yt-dlp", "--extractor-args", "youtube:player_client=ios", "--get-url", "--no-playlist", "--quiet", "-f", "ba", "-g", video_id]
+        result = subprocess.run(command, capture_output=True, text=True)
+        if result.returncode == 0:
+            url = result.stdout.strip()
+            return {'audio_url': url}
+        else: print("Error: ", result.stderr)
 
-            for fmt in info.get("formats", []):
-                if fmt.get("ext") == "m4a":
-                    return {'audio_url': fmt["url"]}
-        return None
 
     async def find_stream_list(query: str, filter: str = 'songs'):
         if filter == 'songs':

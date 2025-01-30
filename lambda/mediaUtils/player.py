@@ -28,7 +28,8 @@ def decode_hex(encoded_string: str) -> str:
     lower_encoded_string = encoded_string.lower()
     return ''.join([chr(int(lower_encoded_string[i:i+2], 16)) for i in range(0, len(lower_encoded_string), 2)])
 
-def get_similarity(x,y):
+def get_similarity(x: str, y: str):
+    x, y = x.lower(), y.lower()
     intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
     union_cardinality = len(set.union(*[set(x), set(y)]))
     return intersection_cardinality/float(union_cardinality)
@@ -111,9 +112,9 @@ class Attributes:
         return handler_input.request_envelope.request.token
 
     @staticmethod
-    def get_metadata_by_play_order(handler_input: HandlerInput) -> player_models.Metadata: 
+    def get_metadata_by_play_order(handler_input: HandlerInput, index: int = None) -> player_models.Metadata: 
         playback_info = Attributes.get_playback_info(handler_input)
-        index = playback_info["index"]
+        if not index: index = playback_info["index"]
         play_order_index = playback_info['play_order'][index]
         playlist = Attributes.get_playlist(handler_input)
         return playlist[play_order_index]
@@ -133,12 +134,14 @@ class Attributes:
         return play_order[diff:]+play_order[:diff]
     
     @staticmethod
-    def match_playlist_name(handler_input: HandlerInput, playlist_name: str, similarity: float = 0.7) -> str:
+    def match_playlist_name(handler_input: HandlerInput, playlist_name: str, match_similarity: float = 0.7) -> str:
         user_attr = Attributes.get_user_attributes(handler_input)
         saved_playlists = user_attr['saved_playlists']
         all_list = list(saved_playlists.keys())
         for name in all_list:
-            if get_similarity(name, playlist_name)>similarity: return name
+            similarity = get_similarity(name, playlist_name)
+            logger.info(f'similarity -> {similarity}, left -> {name}, right -> {playlist_name}')
+            if similarity > match_similarity: return name
         return None
     
     @staticmethod
@@ -200,7 +203,7 @@ class Api:
             song_info_list = json.loads(response.data.decode("utf-8"))
             return from_dict(player_models.SongInfoList, song_info_list), None
         else: 
-            return None, Exception(data.API_CONNECTION_ISSUE % response.status)
+            return None, Exception(data.API_CONNECTION_ISSUE)
 
     @staticmethod  
     def stream_playlist(handler_input: HandlerInput, playlist_id: str) -> Tuple[player_models.SongInfoList, Exception]:
@@ -211,7 +214,7 @@ class Api:
         if response.status == 200: 
             song_info_list = json.loads(response.data.decode("utf-8"))
             return from_dict(player_models.SongInfoList, song_info_list), None
-        else: return None, Exception(data.API_CONNECTION_ISSUE % response.status)
+        else: return None, Exception(data.API_CONNECTION_ISSUE)
         
     @staticmethod
     def get_stream(handler_input: HandlerInput, video_id: str) -> Tuple[player_models.Stream, None]:
@@ -225,7 +228,7 @@ class Api:
             player_info = Attributes.get_playback_info(handler_input)
             player_info['stream_url'] = stream.audio_url
             return stream, None
-        else: return None, Exception(data.API_CONNECTION_ISSUE % response.status)
+        else: return None, Exception(data.API_CONNECTION_ISSUE)
         
     @staticmethod
     def get_playlist_info(handler_input: HandlerInput, playlist_id: str) -> Tuple[player_models.Playlist, None]:
@@ -236,7 +239,7 @@ class Api:
         if response.status == 200:
             response_json = json.loads(response.data.decode("utf-8"))
             return player_models.Playlist(response_json['id'], response_json['title']), None
-        else: return None, Exception(data.API_CONNECTION_ISSUE % response.status)
+        else: return None, Exception(data.API_CONNECTION_ISSUE)
 
 
 class Controller:

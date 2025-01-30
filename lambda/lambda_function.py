@@ -51,7 +51,7 @@ class PlaySongIntentHandler(AbstractRequestHandler):
             playlist = player.Attributes.get_from_saved_playlists(handler_input, playlist_name)
             if playlist: 
                 player.send_progressive_response(handler_input, f'Starting playlist {playlist_name}.')
-                return player.Controller.start_playlist(handler_input, playlist)
+                return player.Controller.fetch(handler_input, playlist_id=playlist.id)
             
         player.send_progressive_response(handler_input, 'Searching...')
         return player.Controller.fetch(
@@ -476,10 +476,10 @@ class PlaybackNearlyFinishedEventHandler(AbstractRequestHandler):
 
         playback_info["next_stream_enqueued"] = True
 
-        current_metadata = playlist[current_index]
+        current_metadata = player.Attributes.get_metadata_by_play_order(handler_input, current_index)
         current_video_id = current_metadata.video_id
 
-        enqueue_metadata = playlist[enqueue_index]
+        enqueue_metadata = player.Attributes.get_metadata_by_play_order(handler_input, enqueue_index) # playlist[enqueue_index]
         enqueue_video_id = enqueue_metadata.video_id
         enqueue_stream, error = player.Api.get_stream(handler_input, enqueue_video_id)
         if error: return handler_input.response_builder.speak(str(error)).response
@@ -499,7 +499,7 @@ class PlaybackNearlyFinishedEventHandler(AbstractRequestHandler):
                         expected_previous_token=current_video_id),
                     metadata=player.Attributes.get_audio_item_metadata(enqueue_metadata))))
         
-        logger.info(f'playback_info -> {playback_info}')
+        logger.info(f'current_video_id -> {current_video_id}, enqueue_video_id -> {enqueue_video_id}, current_index -> {current_index}, enqueue_index -> {enqueue_index}')
 
 
         return handler_input.response_builder.response
